@@ -21,6 +21,10 @@ class Usuarios {
         return pessoa;
         //Se não encontra nenhuma pessoa com o id retorna undefined ou null
     }
+
+    getPessoas(){
+        return this.pessoas;
+    }
 }
 
 module.exports = {
