@@ -18,7 +18,9 @@ socket.on('connect', function() {
     //Quando a pessoa se conecta pelo frontend
     //Vamos mandar uma mensagem para o servidor informando 
     //Quem é a pessoa que está entrando no chat
-    socket.emit('entrarChat', {usuario});
+    socket.emit('entrarChat', usuario, function(resp){
+        console.log('Usuários conectados', resp);
+    });
 });
 
 // escuchar
