@@ -1,13 +1,18 @@
 var socket = io();
 
 socket.on('connect', function() {
-    console.log('Conectado al servidor');
+    console.log('Conectado ao servidor');
+
+    //Quando a pessoa se conecta pelo frontend
+    //Vamos mandar uma mensagem para o servidor informando 
+    //Quem é a pessoa que está entrando no chat
+    socket.emit('entrarChat', {usuario: 'Rodrigo'});
 });
 
 // escuchar
 socket.on('disconnect', function() {
 
-    console.log('Perdimos conexión con el servidor');
+    console.log('Perdemos a conexão com o servidor');
 
 });
 
