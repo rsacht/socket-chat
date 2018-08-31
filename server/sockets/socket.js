@@ -17,5 +17,12 @@ io.on('connection', (client) => {
 
         let pessoas = usuarios.adicionarPessoa(client.id,data.nome);
         callback(pessoas);
+    });
+
+    //O servidor será notificado quando o cliente sair do chat
+    //Efetuando a limpeza do navegador
+    client.on('disconnect', () =>{
+        let pessoaExcluida = usuarios.excluirPessoa(client.id);
     })
+
 });
