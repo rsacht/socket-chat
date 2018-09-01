@@ -8,27 +8,32 @@ io.on('connection', (client) => {
 
     //Configurando o listener para receber a mensagem do frontend
     client.on('entrarChat', (data, callback) =>{
-        console.log(data);
         //Se não vem o nome
-        if(!data.nome){
+        if(!data.nome || !data.sala){
             return callback({
                 error:true,
-                mensagem: 'O nome é necessário'
+                mensagem: 'O nome/sala é necessário'
             });
         }
 
-        let pessoas = usuarios.adicionarPessoa(client.id,data.nome);
+        //Conecta um usuário a uma sala
+        client.join(data.sala);
+
+        //Identificar em que sala está se conectando
+        usuarios.adicionarPessoa(client.id,data.nome, data.sala);
 
         //Este evendo dispara sempre que uma pessoa entra ou sai do chat
         //Para todas as pessoas da lista getPessoas
-        client.broadcast.emit('listaPessoas', usuarios.getPessoas());
-        callback(pessoas);
+        client.broadcast.emit('listaPessoas', usuarios.getPessoasPorSala(data.sala));
+        //Retorna os usuários da sala
+        callback(usuarios.getPessoasPorSala(data.sala));
     });
 
     client.on('criarMensagem', (data) =>{
         let pessoa = usuarios.getPessoa(client.id);
         let mensagem = criarMensagem(pessoa.nome, data.mensagem);
-        client.broadcast.emit('criarMensagem', mensagem);
+        //Cria a mensagem somente para as pessoas que estão na mesma sala
+        client.broadcast.to(pessoa.sala).emit('criarMensagem', mensagem);
     });
 
     //O servidor será notificado quando o cliente sair do chat
@@ -36,11 +41,11 @@ io.on('connection', (client) => {
     client.on('disconnect', () =>{
         let pessoaExcluida = usuarios.excluirPessoa(client.id);
 
-        client.broadcast.emit('criarMensagem',criarMensagem('Administrador', `${pessoaExcluida.nome} saiu`));
+        client.broadcast.to(pessoaExcluida.sala).emit('criarMensagem',criarMensagem('Administrador', `${pessoaExcluida.nome} saiu`));
     
         //Este evendo dispara sempre que uma pessoa entra ou sai do chat
-        //Para todas as pessoas da lista getPessoas
-        client.broadcast.emit('listaPessoas', usuarios.getPessoas());
+        //Para todas as pessoas da lista getPessoas que estão na sala
+        client.broadcast.to(pessoaExcluida.sala).emit('listaPessoas', usuarios.getPessoasPorSala(pessoaExcluida.sala));
     });
 
     //Mensagens privadas

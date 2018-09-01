@@ -5,8 +5,8 @@ class Usuarios {
         this.pessoas = [];
     }
 
-    adicionarPessoa(id, nome){
-        let pessoa = {id, nome};
+    adicionarPessoa(id, nome, sala){
+        let pessoa = {id, nome, sala};
 
         //Adiciona a pessoa ao array de pessoas do construtor
         this.pessoas.push(pessoa);
@@ -26,6 +26,13 @@ class Usuarios {
 
     getPessoas(){
         return this.pessoas;
+    }
+
+    getPessoasPorSala(sala){
+        let pessoasNaSala = this.pessoas.filter(pessoa =>{
+            return pessoa.sala === sala;
+        });
+        return pessoasNaSala;
     }
 
     excluirPessoa(id){
