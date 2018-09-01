@@ -40,8 +40,8 @@ socket.emit('enviarMensaje', {
 });
 
 // Escuchar información
-socket.on('enviarMensaje', function(mensaje) {
+socket.on('criarMensagem', function(mensagem) {
 
-    console.log('Servidor:', mensaje);
+    console.log('Servidor:', mensagem);
 
 });

@@ -23,6 +23,8 @@ io.on('connection', (client) => {
     //Efetuando a limpeza do navegador
     client.on('disconnect', () =>{
         let pessoaExcluida = usuarios.excluirPessoa(client.id);
+
+        client.broadcast.emit('criarMensagem', {usuario: 'Administrador', mensagem: `${pessoaExcluida.nome} abandonou o chat`})
     })
 
 });
