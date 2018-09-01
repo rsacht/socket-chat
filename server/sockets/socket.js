@@ -8,6 +8,7 @@ io.on('connection', (client) => {
 
     //Configurando o listener para receber a mensagem do frontend
     client.on('entrarChat', (data, callback) =>{
+        console.log(data);
         //Se não vem o nome
         if(!data.nome){
             return callback({
@@ -46,7 +47,8 @@ io.on('connection', (client) => {
     //Enviando mensagens privadas
     client.on('mensagemPrivada', data =>{
         let pessoa = usuarios.getPessoa(client.id);
-
+        //Mandando mensagem para um determinado ID to(data.para)
+        //Pode ser o id da sala também
         client.broadcast.to(data.para).emit('mensagemPrivada', criarMensagem(pessoa.nome, data.mensagem));
     });
 

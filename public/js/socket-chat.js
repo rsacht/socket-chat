@@ -2,14 +2,16 @@ var socket = io();
 
 //Configurando uma variável para o nome do usuário
 var params = new URLSearchParams(window.location.search);
-//Se não vier o nome do usuário na URL dispara um erro
-if(!params.has('nome')){
+//Se não vier o nome do usuário ou da sala na URL dispara um erro
+if(!params.has('nome') || !params.has('sala')){
+    //Redireciona para:
     window.location = 'index.html';
-    throw new Error('O nome é necessário');
+    throw new Error('O nome e sala são necessários');
 }
 
 var usuario = {
-    nome: params.get('nome')
+    nome: params.get('nome'),
+    sala: params.get('sala')
 };
 
 socket.on('connect', function() {
