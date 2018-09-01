@@ -24,6 +24,11 @@ io.on('connection', (client) => {
         callback(pessoas);
     });
 
+    client.on('criarMensagem', (data) =>{
+        let mensagem = criarMensagem(data.nome, data.mensagem);
+        client.broadcast.emit('criarMensagem', mensagem);
+    });
+
     //O servidor será notificado quando o cliente sair do chat
     //Efetuando a limpeza do navegador
     client.on('disconnect', () =>{
