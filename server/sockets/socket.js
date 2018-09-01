@@ -25,7 +25,8 @@ io.on('connection', (client) => {
     });
 
     client.on('criarMensagem', (data) =>{
-        let mensagem = criarMensagem(data.nome, data.mensagem);
+        let pessoa = usuarios.getPessoa(client.id);
+        let mensagem = criarMensagem(pessoa.nome, data.mensagem);
         client.broadcast.emit('criarMensagem', mensagem);
     });
 
