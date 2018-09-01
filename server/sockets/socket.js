@@ -16,6 +16,10 @@ io.on('connection', (client) => {
         }
 
         let pessoas = usuarios.adicionarPessoa(client.id,data.nome);
+
+        //Este evendo dispara sempre que uma pessoa entra ou sai do chat
+        //Para todas as pessoas da lista getPessoas
+        client.broadcast.emit('listaPessoas', usuarios.getPessoas());
         callback(pessoas);
     });
 
@@ -25,6 +29,10 @@ io.on('connection', (client) => {
         let pessoaExcluida = usuarios.excluirPessoa(client.id);
 
         client.broadcast.emit('criarMensagem', {usuario: 'Administrador', mensagem: `${pessoaExcluida.nome} abandonou o chat`})
-    })
+    
+        //Este evendo dispara sempre que uma pessoa entra ou sai do chat
+        //Para todas as pessoas da lista getPessoas
+        client.broadcast.emit('listaPessoas', usuarios.getPessoas());
+    });
 
 });
