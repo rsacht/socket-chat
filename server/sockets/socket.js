@@ -42,4 +42,12 @@ io.on('connection', (client) => {
         client.broadcast.emit('listaPessoas', usuarios.getPessoas());
     });
 
+    //Mensagens privadas
+    //Enviando mensagens privadas
+    client.on('mensagemPrivada', data =>{
+        let pessoa = usuarios.getPessoa(client.id);
+
+        client.broadcast.emit('mensagemPrivada', criarMensagem(pessoa.nome, data.mensagem));
+    });
+
 });
