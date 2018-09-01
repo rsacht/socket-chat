@@ -33,7 +33,7 @@ socket.on('disconnect', function() {
 
 // emit: Envia informação
 // socket.emit('criarMensagem', {
-//     usuario: 'Fernando',
+//     nome: 'Fernando',
 //     mensaje: 'Hola Mundo'
 // }, function(resp) {
 //     console.log('respuesta server: ', resp);
@@ -54,3 +54,8 @@ socket.on('listaPessoas', function(pessoas) {
 
 });
 
+//Mensagens privadas
+//Cliente escutando mensagens privadas
+socket.on('mensagemPrivada', function(mensagem){
+    console.log('Mensagem Privada: ', mensagem);
+})
