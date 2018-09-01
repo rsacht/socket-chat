@@ -1,5 +1,6 @@
 const { io } = require('../server');
 const {Usuarios} = require('../classes/usuarios');
+const {criarMensagem} = require('../utilidades/utilidades');
 
 const usuarios = new Usuarios();
 
@@ -28,7 +29,7 @@ io.on('connection', (client) => {
     client.on('disconnect', () =>{
         let pessoaExcluida = usuarios.excluirPessoa(client.id);
 
-        client.broadcast.emit('criarMensagem', {usuario: 'Administrador', mensagem: `${pessoaExcluida.nome} abandonou o chat`})
+        client.broadcast.emit('criarMensagem',criarMensagem('Administrador', `${pessoaExcluida.nome} saiu`));
     
         //Este evendo dispara sempre que uma pessoa entra ou sai do chat
         //Para todas as pessoas da lista getPessoas

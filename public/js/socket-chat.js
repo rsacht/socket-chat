@@ -31,15 +31,15 @@ socket.on('disconnect', function() {
 });
 
 
-// Enviar información
-socket.emit('enviarMensaje', {
-    usuario: 'Fernando',
-    mensaje: 'Hola Mundo'
-}, function(resp) {
-    console.log('respuesta server: ', resp);
-});
+// emit: Envia informação
+// socket.emit('criarMensagem', {
+//     usuario: 'Fernando',
+//     mensaje: 'Hola Mundo'
+// }, function(resp) {
+//     console.log('respuesta server: ', resp);
+// });
 
-// Escuchar información
+// on: Escuta informação
 socket.on('criarMensagem', function(mensagem) {
 
     console.log('Servidor:', mensagem);
