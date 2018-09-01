@@ -45,3 +45,12 @@ socket.on('criarMensagem', function(mensagem) {
     console.log('Servidor:', mensagem);
 
 });
+
+//Escuta mundanças de usuários
+//Quando um usuário entra ou sai do chat
+socket.on('listaPessoas', function(pessoas) {
+
+    console.log('Servidor:', pessoas);
+
+});
+
