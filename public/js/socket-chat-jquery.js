@@ -22,3 +22,12 @@ function renderizarUsuarios(pessoas){//Array esperado [{},{},{}]
     divUsuarios.html(html);
 
 }
+
+//Listeners
+//Quando tiver uma âncora em divUsuario se dispara a função
+divUsuarios.on('click','a',function(){
+    //this faz referencia a um elemento que está dentro do 'a', neste caso o data('id)
+    // <a data-id>
+    var id =$(this).data('id');
+    console.log(id);
+});
