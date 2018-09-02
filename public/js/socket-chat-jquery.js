@@ -1,5 +1,8 @@
 var params = new URLSearchParams(window.location.search);
 
+//Referências de JQuery
+var divUsuarios = $('#divUsuarios');
+
 //Funções para renderizar usuários
 function renderizarUsuarios(pessoas){//Array esperado [{},{},{}]
     console.log(pessoas);
@@ -15,5 +18,7 @@ function renderizarUsuarios(pessoas){//Array esperado [{},{},{}]
         html += '    <a data-id="'+ pessoas[i].id +'" href="javascript:void(0)"><img src="assets/images/users/1.jpg" alt="user-img" class="img-circle"> <span>'+ pessoas[i].nome +' <small class="text-success">online</small></span></a>';
         html += '</li>';   
     }
+
+    divUsuarios.html(html);
 
 }

@@ -22,6 +22,7 @@ socket.on('connect', function() {
     //Quem é a pessoa que está entrando no chat
     socket.emit('entrarChat', usuario, function(resp){
         console.log('Usuários conectados', resp);
+        renderizarUsuarios(resp);
     });
 });
 
