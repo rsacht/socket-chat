@@ -53,7 +53,7 @@ socket.on('criarMensagem', function(mensagem) {
 //Quando um usuário entra ou sai do chat
 socket.on('listaPessoas', function(pessoas) {
 
-    console.log('Servidor:', pessoas);
+    renderizarUsuarios(pessoas);
 
 });
 
