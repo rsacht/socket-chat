@@ -1,7 +1,11 @@
 var params = new URLSearchParams(window.location.search);
+var nome = params.get('nome');
+var sala = params.get('sala');
 
 //Referências de JQuery
 var divUsuarios = $('#divUsuarios');
+var formEnviar = $('#formEnviar');
+var txtMensagem = $('#txtMensagem');
 
 //Funções para renderizar usuários
 function renderizarUsuarios(pessoas){//Array esperado [{},{},{}]
@@ -32,4 +36,19 @@ divUsuarios.on('click','a',function(){
     if(id){
         console.log(id);
     }
+});
+
+formEnviar.on('submit', function(e){
+    e.preventDefault();
+
+    if(txtMensagem.val().trim().length === 0){
+        return;
+    }
+
+    socket.emit('criarMensagem', {
+        nome: nome,
+        mensagem: txtMensagem.val()
+    }, function(mensagem) {
+        txtMensagem.val('').focus();
+    });
 });

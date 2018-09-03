@@ -29,11 +29,13 @@ io.on('connection', (client) => {
         callback(usuarios.getPessoasPorSala(data.sala));
     });
 
-    client.on('criarMensagem', (data) =>{
+    client.on('criarMensagem', (data, callback) =>{
         let pessoa = usuarios.getPessoa(client.id);
         let mensagem = criarMensagem(pessoa.nome, data.mensagem);
         //Cria a mensagem somente para as pessoas que estão na mesma sala
         client.broadcast.to(pessoa.sala).emit('criarMensagem', mensagem);
+
+        callback(mensagem);
     });
 
     //O servidor será notificado quando o cliente sair do chat
