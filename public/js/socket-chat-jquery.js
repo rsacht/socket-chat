@@ -6,6 +6,7 @@ var sala = params.get('sala');
 var divUsuarios = $('#divUsuarios');
 var formEnviar = $('#formEnviar');
 var txtMensagem = $('#txtMensagem');
+var divChatbox = $('#divChatbox');
 
 //Funções para renderizar usuários
 function renderizarUsuarios(pessoas){//Array esperado [{},{},{}]
@@ -25,6 +26,20 @@ function renderizarUsuarios(pessoas){//Array esperado [{},{},{}]
 
     divUsuarios.html(html);
 
+}
+
+function renderizarMensagens(mensagem){
+    var html = '';
+    html += '<li>';
+    html += '    <div class="chat-img"><img src="assets/images/users/1.jpg" alt="user" /></div>';
+    html += '   <div class="chat-content">';
+    html += '        <h5>'+ mensagem.nome +'</h5>';
+    html += '        <div class="box bg-light-info">'+ mensagem.mensagem +'</div>';
+    html += '    </div>';
+    html += '    <div class="chat-time">10:56 am</div>';
+    html += '</li>';
+
+    divChatbox.append(html);
 }
 
 //Listeners
@@ -50,5 +65,6 @@ formEnviar.on('submit', function(e){
         mensagem: txtMensagem.val()
     }, function(mensagem) {
         txtMensagem.val('').focus();
+        renderizarMensagens(mensagem)
     });
 });
