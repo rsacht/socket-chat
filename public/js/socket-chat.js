@@ -45,7 +45,8 @@ socket.on('disconnect', function() {
 // on: Escuta informação
 socket.on('criarMensagem', function(mensagem) {
 
-    console.log('Servidor:', mensagem);
+    //console.log('Servidor:', mensagem);
+    renderizarMensagens(mensagem);
 
 });
 
