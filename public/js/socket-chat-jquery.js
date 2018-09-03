@@ -28,16 +28,28 @@ function renderizarUsuarios(pessoas){//Array esperado [{},{},{}]
 
 }
 
-function renderizarMensagens(mensagem){
+function renderizarMensagens(mensagem, eu){
     var html = '';
+    var dataHora = new Date(mensagem.dataHora);
+    var hora = dataHora.getHours() + ':' + dataHora.getMinutes();
+
     html += '<li class="animated fadeIn">';
     html += '    <div class="chat-img"><img src="assets/images/users/1.jpg" alt="user" /></div>';
     html += '   <div class="chat-content">';
     html += '        <h5>'+ mensagem.nome +'</h5>';
     html += '        <div class="box bg-light-info">'+ mensagem.mensagem +'</div>';
     html += '    </div>';
-    html += '    <div class="chat-time">10:56 am</div>';
+    html += '    <div class="chat-time">'+ hora +'</div>';
     html += '</li>';
+
+    html += '<li class="reverse">';
+    html += '    <div class="chat-content">';
+    html += '        <h5>'+ mensagem.nome +'</h5>';
+    html += '        <div class="box bg-light-inverse">'+ mensagem.mensagem +'.</div>';
+    html += '    </div>';
+    html += '    <div class="chat-img"><img src="assets/images/users/5.jpg" alt="user" /></div>';
+    html += '    <div class="chat-time">'+ hora +'</div>';
+    html += ' </li>';
 
     divChatbox.append(html);
 }
