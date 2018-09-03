@@ -49,7 +49,9 @@ function renderizarMensagens(mensagem, eu){
         html += ' </li>';
     }else{
         html += '<li class="animated fadeIn">';
-        html += '    <div class="chat-img"><img src="assets/images/users/1.jpg" alt="user" /></div>';
+        if (mensagem.nome !== 'Administrador'){
+            html += '    <div class="chat-img"><img src="assets/images/users/1.jpg" alt="user" /></div>';
+        }   
         html += '   <div class="chat-content">';
         html += '        <h5>'+ mensagem.nome +'</h5>';
         html += '        <div class="box bg-light-'+ adminClass +'">'+ mensagem.mensagem +'</div>';
