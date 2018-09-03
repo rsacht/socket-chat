@@ -30,8 +30,8 @@ function renderizarUsuarios(pessoas){//Array esperado [{},{},{}]
 
 function renderizarMensagens(mensagem, eu){
     var html = '';
-    var dataHora = new Date(mensagem.dataHora);
-    var hora = dataHora.getHours() + ':' + dataHora.getMinutes();
+    var dataHora = new Date();
+    var hora = dataHora.getHours()+ ':' + dataHora.getMinutes();
 
     if(eu){
         html += '<li class="reverse">';
