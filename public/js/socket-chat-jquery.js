@@ -30,7 +30,7 @@ function renderizarUsuarios(pessoas){//Array esperado [{},{},{}]
 
 function renderizarMensagens(mensagem){
     var html = '';
-    html += '<li>';
+    html += '<li class="animated fadeIn">';
     html += '    <div class="chat-img"><img src="assets/images/users/1.jpg" alt="user" /></div>';
     html += '   <div class="chat-content">';
     html += '        <h5>'+ mensagem.nome +'</h5>';
