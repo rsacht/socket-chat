@@ -25,6 +25,8 @@ io.on('connection', (client) => {
         //Este evendo dispara sempre que uma pessoa entra ou sai do chat
         //Para todas as pessoas da lista getPessoas
         client.broadcast.emit('listaPessoas', usuarios.getPessoasPorSala(data.sala));
+        //Notifica que um usuário entrou no chat
+        client.broadcast.to(data.sala).emit('criarMensagem',criarMensagem('Administrador', `${data.nome} entrou`));
         //Retorna os usuários da sala
         callback(usuarios.getPessoasPorSala(data.sala));
     });
@@ -34,7 +36,7 @@ io.on('connection', (client) => {
         let mensagem = criarMensagem(pessoa.nome, data.mensagem);
         //Cria a mensagem somente para as pessoas que estão na mesma sala
         client.broadcast.to(pessoa.sala).emit('criarMensagem', mensagem);
-
+        
         callback(mensagem);
     });
 
