@@ -46,7 +46,7 @@ socket.on('disconnect', function() {
 socket.on('criarMensagem', function(mensagem) {
 
     //console.log('Servidor:', mensagem);
-    renderizarMensagens(mensagem);
+    renderizarMensagens(mensagem, false);//eu = false
 
 });
 
