@@ -33,6 +33,11 @@ function renderizarMensagens(mensagem, eu){
     var dataHora = new Date();
     var hora = dataHora.getHours()+ ':' + dataHora.getMinutes();
 
+    var adminClass = 'info';
+    if(mensagem.nome === 'Administrador'){
+        adminClass = 'danger';
+    }
+
     if(eu){
         html += '<li class="reverse">';
         html += '    <div class="chat-content">';
@@ -47,7 +52,7 @@ function renderizarMensagens(mensagem, eu){
         html += '    <div class="chat-img"><img src="assets/images/users/1.jpg" alt="user" /></div>';
         html += '   <div class="chat-content">';
         html += '        <h5>'+ mensagem.nome +'</h5>';
-        html += '        <div class="box bg-light-info">'+ mensagem.mensagem +'</div>';
+        html += '        <div class="box bg-light-'+ adminClass +'">'+ mensagem.mensagem +'</div>';
         html += '    </div>';
         html += '    <div class="chat-time">'+ hora +'</div>';
         html += '</li>';
