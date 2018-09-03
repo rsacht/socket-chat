@@ -62,7 +62,24 @@ function renderizarMensagens(mensagem, eu){
 
     divChatbox.append(html);
 }
+//Verifica o tamanho da tela e rola automaticamente para baixo
+//Assim sempre veremos a ultima mensagem
+function scrollBottom() {
 
+    // selectors
+    var newMessage = divChatbox.children('li:last-child');
+
+    // heights
+    var clientHeight = divChatbox.prop('clientHeight');
+    var scrollTop = divChatbox.prop('scrollTop');
+    var scrollHeight = divChatbox.prop('scrollHeight');
+    var newMessageHeight = newMessage.innerHeight();
+    var lastMessageHeight = newMessage.prev().innerHeight() || 0;
+
+    if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
+        divChatbox.scrollTop(scrollHeight);
+    }
+}
 //Listeners
 //Quando tiver uma âncora em divUsuario se dispara a função
 divUsuarios.on('click','a',function(){
@@ -87,5 +104,6 @@ formEnviar.on('submit', function(e){
     }, function(mensagem) {
         txtMensagem.val('').focus();
         renderizarMensagens(mensagem, true)//eu = true
+        scrollBottom();
     });
 });

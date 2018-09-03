@@ -47,7 +47,7 @@ socket.on('criarMensagem', function(mensagem) {
 
     //console.log('Servidor:', mensagem);
     renderizarMensagens(mensagem, false);//eu = false
-
+    scrollBottom();
 });
 
 //Escuta mundanças de usuários
